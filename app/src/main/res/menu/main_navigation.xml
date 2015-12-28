@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:checkableBehavior="single">
+    <item android:title="糗事"
+          android:id="@+id/item_qiushi"
+          android:icon="@mipmap/menu_item_icon_xiushi"
+          android:checkable="true"
+          />
+    <item android:title="糗友圈"
+          android:id="@+id/item_qiushicircle"
+          android:icon="@mipmap/menu_item_icon_xiuyoucircle"
+          android:checkable="true"
+            />
+    <item android:title="发现"
+          android:id="@+id/item_nearby"
+          android:icon="@mipmap/menu_item_icon_nearby"
+          android:checkable="true"
+            />
+    <item android:title="小纸条"
+          android:id="@+id/item_message"
+          android:icon="@mipmap/menu_item_icon_message"
+          android:checkable="true"
+            />
+    <item android:title="我"
+          android:id="@+id/item_mine"
+          android:icon="@mipmap/menu_item_icon_mime"
+          android:checkable="true"
+            />
+</group>
+
+</menu>
