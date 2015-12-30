@@ -21,11 +21,11 @@ import java.util.regex.Pattern;
 /**
  * Created by Flming2015 on 2015/12/29.
  */
-public class CunWenAdapter extends BaseAdapter {
+public class CunTuAdapter extends BaseAdapter {
     private Context context;
     private List<CunTu.ItemsEntity> list;
 
-    public CunWenAdapter(Context context) {
+    public CunTuAdapter(Context context) {
         this.context = context;
         list = new ArrayList<>();
     }
@@ -52,41 +52,38 @@ public class CunWenAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = LayoutInflater.from(context).inflate(R.layout.cuntu_item, parent, false);
-                convertView.setTag(new ViewHolder(convertView));
-            }
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.cuntu_item, parent, false);
+            convertView.setTag(new ViewHolder(convertView));
+        }
 
-            CunTu.ItemsEntity item = list.get(position);
-            ViewHolder holder = (ViewHolder)convertView.getTag();
+        CunTu.ItemsEntity item = list.get(position);
+        ViewHolder holder = (ViewHolder)convertView.getTag();
 
-            if (item.getUser()!=null){
-                holder.name.setText(item.getUser().getLogin());
+        if (item.getUser()!=null){
+            holder.name.setText(item.getUser().getLogin());
 
-                Picasso.with(context).load(getIconURL(item.getUser().getId(), item.getUser().getIcon()))
-                        .transform(new CircleTransformation())
-                        .into(holder.icon);
-            } else {
-                holder.name.setText("匿名用户");
-                holder.icon.setImageResource(R.mipmap.ic_launcher);
-            }
+            Picasso.with(context).load(getIconURL(item.getUser().getId(), item.getUser().getIcon()))
+                    .transform(new CircleTransformation())
+                    .into(holder.icon);
+        } else {
+            holder.name.setText("匿名用户");
+            holder.icon.setImageResource(R.mipmap.ic_launcher);
+        }
 
-            holder.content.setText(item.getContent());
-            if (item.getImage() == null) {
-                holder.image.setVisibility(View.GONE);
-            } else {
-                holder.image.setVisibility(View.VISIBLE);
-                Picasso.with(context)
-                        .load(getImageURL(item.getImage()))
-                        .resize(parent.getWidth(), 0)
-                        .placeholder(R.mipmap.ic_launcher)
-                        .error(R.mipmap.ic_launcher)
-                        .into(holder.image);
-            }
-
-
-
-      //  holder.comments.setText(item.getComments_count());
+        holder.content.setText(item.getContent());
+        if (item.getImage() == null) {
+            holder.image.setVisibility(View.GONE);
+        } else {
+            holder.image.setVisibility(View.VISIBLE);
+            Picasso.with(context)
+                    .load(getImageURL(item.getImage()))
+                    .resize(parent.getWidth(), 0)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .error(R.mipmap.ic_launcher)
+                    .into(holder.image);
+        }
+        //  holder.comments.setText(item.getComments_count());
         //holder.up.setText(item.getVotes().getUp());
 
         return convertView;
@@ -97,7 +94,7 @@ public class CunWenAdapter extends BaseAdapter {
         Pattern pattern = Pattern.compile("(\\d+)\\d{4}");
         Matcher matcher = pattern.matcher(image);
         matcher.find();
-       // Log.d(TAG, "getImageURL: " + matcher.group());
+        // Log.d(TAG, "getImageURL: " + matcher.group());
         return String.format(url, matcher.group(1), matcher.group(), "medium", image);
     }
     public static String getIconURL(long id, String icon){
@@ -118,12 +115,12 @@ public class CunWenAdapter extends BaseAdapter {
         private TextView comments;
 
         public ViewHolder(View itemView) {
-//            icon = ((ImageView) itemView.findViewById(R.id.cunwen_user_icon));
-//            image = ((ImageView) itemView.findViewById(R.id.cunwen_user_image));
-//            content = ((TextView) itemView.findViewById(R.id.cunwen_user_content));
-//            name = ((TextView) itemView.findViewById(R.id.cunwen_user_name));
-//            up = ((TextView) itemView.findViewById(R.id.cunwen_user_up));
-//            comments = ((TextView) itemView.findViewById(R.id.cunwen_comments_count));
+            icon = ((ImageView) itemView.findViewById(R.id.cuntu_user_icon));
+            image = ((ImageView) itemView.findViewById(R.id.cuntu_user_image));
+            content = ((TextView) itemView.findViewById(R.id.cuntu_user_content));
+            name = ((TextView) itemView.findViewById(R.id.cuntu_user_name));
+            up = ((TextView) itemView.findViewById(R.id.cuntu_user_up));
+            comments = ((TextView) itemView.findViewById(R.id.cuntu_comments_count));
         }
     }
 }

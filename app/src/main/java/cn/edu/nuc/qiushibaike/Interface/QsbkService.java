@@ -1,6 +1,7 @@
 package cn.edu.nuc.qiushibaike.Interface;
 
-import cn.edu.nuc.qiushibaike.entitys.CunWen;
+import cn.edu.nuc.qiushibaike.entitys.CunTu;
+import cn.edu.nuc.qiushibaike.entitys.CunTuComment;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -11,6 +12,8 @@ import retrofit.http.Query;
  */
 public interface QsbkService {
         @GET("article/list/{type}")
-        Call<CunWen> getList(@Path("type") String type, @Query("page") int page);
+        Call<CunTu> getList(@Path("type") String type, @Query("page") int page);
+        @GET("article/{type}/comments")
+        Call<CunTuComment> getCommentList(@Path("type") int type,@Query("page") int page);
     }
 

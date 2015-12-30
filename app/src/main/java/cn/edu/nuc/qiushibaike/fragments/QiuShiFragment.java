@@ -47,7 +47,7 @@ public class QiuShiFragment extends Fragment{
         fragments.add(JHFragment);
 
         titles = new ArrayList<String>();
-        titles.add("专属");
+        titles.add("专享");
         titles.add("视频");
         titles.add("纯文");
         titles.add("纯图");

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.edu.nuc.qiushibaike" >
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
         android:name=".Applications.BaseApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/touxiang"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity android:name=".MainActivity" >
-
         </activity>
         <activity android:name=".FeiYeActivity" >
             <intent-filter>
@@ -19,6 +19,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".CunTuCommentsActivity" >
         </activity>
     </application>
 
