@@ -84,6 +84,8 @@ public class CunWenAdapter extends BaseAdapter {
                         .into(holder.image);
             }
 
+
+        
         //holder.comments.setText(item.getComments_count());
         //holder.up.setText(item.getVotes().getUp());
 
