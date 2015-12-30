@@ -30,6 +30,7 @@ public class CunWenAdapter extends BaseAdapter {
         this.context = context;
         list = new ArrayList<>();
     }
+    
 
     @Override
     public int getCount() {
