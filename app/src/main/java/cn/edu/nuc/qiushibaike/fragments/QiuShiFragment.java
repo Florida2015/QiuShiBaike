@@ -41,16 +41,16 @@ public class QiuShiFragment extends Fragment{
         JingHuaFragment JHFragment = new JingHuaFragment();
 
         fragments.add(ZXFragment);
+        fragments.add(VFragment);
         fragments.add(CWFragment);
         fragments.add(CTFragment);
-        fragments.add(VFragment);
         fragments.add(JHFragment);
 
         titles = new ArrayList<String>();
         titles.add("专属");
         titles.add("视频");
         titles.add("纯文");
-        titles.add("图文");
+        titles.add("纯图");
         titles.add("精华");
 
         CommonAdapter adapter
