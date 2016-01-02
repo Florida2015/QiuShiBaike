@@ -13,7 +13,7 @@ import retrofit.http.Query;
 public interface QsbkService {
         @GET("article/list/{type}")
         Call<CunTu> getList(@Path("type") String type, @Query("page") int page);
-        @GET("article/{type}/comments")
-        Call<CunTuComment> getCommentList(@Path("type") int type,@Query("page") int page);
+        @GET("article/{userId}/comments")
+        Call<CunTuComment> getCommentList(@Path("userId") int type, @Query("page") int page);
     }
 

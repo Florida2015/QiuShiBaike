@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import cn.edu.nuc.qiushibaike.adapters.CunWenAdapter;
 import cn.edu.nuc.qiushibaike.entitys.CunTu;
 import retrofit.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +50,7 @@ public class CunTuFragment extends Fragment implements Callback<CunTu>, AdapterV
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         QsbkService service = build.create(QsbkService.class);
-        call = service.getList("image",1);
+        call = service.getList("image",6);
         call.enqueue(this);
         return ret;
     }
@@ -75,11 +77,20 @@ public class CunTuFragment extends Fragment implements Callback<CunTu>, AdapterV
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+      //  Object item = parent.getAdapter().getItem(position);
         CunTu.ItemsEntity itemsEntity =list.get(position);
-        CunTu.ItemsEntity.UserEntity user = itemsEntity.getUser();
-        int userId = user.getId();
-        Intent intent = new Intent(getContext(), CunTuCommentsActivity.class);
-        intent.putExtra("userId",userId);
-        startActivity(intent);
+        int userId = itemsEntity.getId();
+        if (itemsEntity.getComments_count()!=0) {
+
+            Log.d("CunTuFragment", "评论数为："+itemsEntity.getComments_count());
+            Intent intent = new Intent(getContext(), CunTuCommentsActivity.class);
+            intent.putExtra("userId", userId);
+            intent.putExtra("itemsEntity",itemsEntity);
+            //intent.putExtra("data", (Serializable) list);
+            startActivity(intent);
+
+        }else{
+            Toast.makeText(getContext(),"没有评论",Toast.LENGTH_SHORT).show();
+        }
     }
 }

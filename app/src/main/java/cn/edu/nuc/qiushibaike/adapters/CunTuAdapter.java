@@ -1,12 +1,11 @@
 package cn.edu.nuc.qiushibaike.adapters;
 
 import android.content.Context;
+import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import cn.edu.nuc.qiushibaike.R;
 import cn.edu.nuc.qiushibaike.Utils.CircleTransformation;
 import cn.edu.nuc.qiushibaike.entitys.CunTu;
@@ -30,6 +29,12 @@ public class CunTuAdapter extends BaseAdapter {
         list = new ArrayList<>();
     }
 
+    public void setList(List<CunTu.ItemsEntity> l) {
+        this.list = l;
+    }
+    public void getList(List<CunTu.ItemsEntity> l) {
+        this.list = l;
+    }
 
     @Override
     public int getCount() {
@@ -83,8 +88,11 @@ public class CunTuAdapter extends BaseAdapter {
                     .error(R.mipmap.ic_launcher)
                     .into(holder.image);
         }
-        //  holder.comments.setText(item.getComments_count());
-        //holder.up.setText(item.getVotes().getUp());
+
+        //！！！！没有toString,直接放数据导致出错
+        holder.comments.setText(Integer.toString(item.getComments_count()));
+        holder.up.setText(Integer.toString(item.getVotes().getUp()));
+        holder.shareCount.setText(Integer.toString(item.getShare_count()));
 
         return convertView;
     }
@@ -106,13 +114,17 @@ public class CunTuAdapter extends BaseAdapter {
         list.addAll(collection);
         notifyDataSetChanged();
     }
-    private static class ViewHolder{
+    private static class ViewHolder implements RadioGroup.OnCheckedChangeListener {
         private ImageView icon;
         private ImageView image;
         private TextView content;
-        private TextView name;
-        private TextView up;
-        private TextView comments;
+        private TextView name;//用户名
+        private TextView up;//好笑
+        private TextView comments;//评论数
+        private TextView shareCount;//分享数
+        private RadioGroup radioGroup;
+        private RadioButton supportButton;
+        private RadioButton unsupportButton;
 
         public ViewHolder(View itemView) {
             icon = ((ImageView) itemView.findViewById(R.id.cuntu_user_icon));
@@ -121,6 +133,31 @@ public class CunTuAdapter extends BaseAdapter {
             name = ((TextView) itemView.findViewById(R.id.cuntu_user_name));
             up = ((TextView) itemView.findViewById(R.id.cuntu_user_up));
             comments = ((TextView) itemView.findViewById(R.id.cuntu_comments_count));
+            shareCount = (TextView) itemView.findViewById(R.id.cuntu_content_share_count);
+            supportButton = (RadioButton) itemView.findViewById(R.id.cuntu_operation_support);
+            unsupportButton = (RadioButton) itemView.findViewById(R.id.cuntu_operation_unsupport);
+            radioGroup = (RadioGroup) itemView.findViewById(R.id.operation_radiogroup);
+            radioGroup.setOnCheckedChangeListener(this);
+        }
+
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            switch (checkedId){
+                case R.id.cuntu_operation_support:
+                    //TODO:点击“好笑”实现数据更新
+                    break;
+                case R.id.cuntu_operation_unsupport:
+                    //TODO:点击“不好笑”实现数据更新
+                    break;
+            }
+            //点击“好笑”或“不好笑”，图片会有变小和放大的效果
+            View buttonView = radioGroup.findViewById(checkedId);
+            if (buttonView != null) {
+                ViewCompat.setScaleX(buttonView, 0.8f);
+                ViewCompat.setScaleY(buttonView, 0.8f);
+                ViewCompat.animate(buttonView).scaleX(1).scaleY(1).setDuration(500).start();
+            }
+
         }
     }
 }

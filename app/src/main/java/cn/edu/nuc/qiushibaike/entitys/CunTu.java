@@ -1,11 +1,12 @@
 package cn.edu.nuc.qiushibaike.entitys;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Flming2015 on 2015/12/29.
  */
-public class CunTu {
+public class CunTu implements Serializable{
 
     /**
      * count : 30
@@ -80,7 +81,7 @@ public class CunTu {
         return items;
     }
 
-    public static class ItemsEntity {
+    public static class ItemsEntity implements Serializable {
         private String format;
         private String image;
         private int published_at;
@@ -217,7 +218,7 @@ public class CunTu {
             return type;
         }
 
-        public static class UserEntity {
+        public static class UserEntity implements Serializable{
             private String state;
             private String role;
             private String login;
@@ -265,7 +266,7 @@ public class CunTu {
             }
         }
 
-        public static class VotesEntity {
+        public static class VotesEntity implements Serializable{
             private int down;
             private int up;
 

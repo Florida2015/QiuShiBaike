@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import cn.edu.nuc.qiushibaike.R;
 import cn.edu.nuc.qiushibaike.Utils.CircleTransformation;
-import cn.edu.nuc.qiushibaike.entitys.CunTu;
 import cn.edu.nuc.qiushibaike.entitys.CunTuComment;
 import com.squareup.picasso.Picasso;
 
@@ -53,7 +52,7 @@ public class CunTuCommentAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.cuntu_comments_item,parent,false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.cuntu_comment_item,parent,false);
             convertView.setTag(new ViewHolder(convertView));
         }
         CunTuComment.ItemsEntity itemsEntity = list.get(position);
@@ -61,7 +60,7 @@ public class CunTuCommentAdapter extends BaseAdapter{
         if (itemsEntity.getUser() != null) {
             //获取评论用户头像
             Picasso.with(context)
-                    .load(getIconURL(itemsEntity.getId(),itemsEntity.getUser().getIcon()))
+                    .load(getIconURL(itemsEntity.getUser().getId(),itemsEntity.getUser().getIcon()))
                     .transform(new CircleTransformation())
                     .into(holder.userIcon);
             //获取用户名
@@ -70,9 +69,9 @@ public class CunTuCommentAdapter extends BaseAdapter{
             holder.userIcon.setImageResource(R.mipmap.ic_launcher);
             holder.userName.setText("匿名用户");
         }
-        holder.huifuCount.setText(itemsEntity.getFloor());
+        holder.huifuCount.setText(Integer.toString(itemsEntity.getFloor()));
         holder.commentContent.setText(itemsEntity.getContent());
-        holder.commentTime.setText(itemsEntity.getUser().getLast_visited_at());
+        holder.commentTime.setText(Integer.toString(itemsEntity.getUser().getLast_visited_at()));
         return convertView;
     }
     public static String getImageURL(String image){
