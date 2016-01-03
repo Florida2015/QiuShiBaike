@@ -28,6 +28,9 @@ public class CunTuAdapter extends BaseAdapter {
         this.context = context;
         list = new ArrayList<>();
     }
+    public  void clear(){
+        list.clear();
+    }
 
     public void setList(List<CunTu.ItemsEntity> l) {
         this.list = l;
